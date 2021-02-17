@@ -1,0 +1,306 @@
+db.getCollection('teacher').find({});
+
+
+db.getCollection('teacher').insert({
+    "model": "Yamaha Fazer",
+    "year": 2008,
+    "price": 3000
+})
+
+
+db.getCollection('teacher').find({payment: 2500})
+
+db.getCollection('teacher').find({
+    payment: 2500,
+    class_curator: 6
+})
+
+
+db.getCollection('teacher').find(
+    {payment: 2000},
+    {
+        name: true,
+        payment: 1,
+        _id: 0
+    }
+)
+
+db.getCollection('teacher').find({
+    $or: [
+        {payment: 2500},
+        {payment: 2000},
+        {class_curator: 8},
+    ]
+})
+
+
+db.getCollection('teacher').find({
+    $and: [
+        {payment: 2500},
+        {class_curator: 6}
+    ]
+})
+
+
+db.getCollection('teacher').find({
+    name: /^ser/i // ser%
+})
+
+
+db.getCollection('teacher').find({
+    name: /ch$/i
+})
+
+
+db.getCollection('teacher').find({
+    name: /.*tor.*/i //%tor%
+})
+
+
+db.getCollection('teacher')
+    .find({})
+    .sort({payment: -1, class_curator: 1})
+
+
+db.getCollection('teacher').find({}).limit(2).skip(4)
+
+
+db.getCollection('teacher').find({
+    payment: {
+        //$gte: 2500  //>=
+        //$gt: 2500 // >
+        //$lte: 2500 // <=
+        //$lt: 2500
+    }
+});
+
+db.getCollection('teacher').find({
+    class_curator: {$in: [7, 8, 9]}
+})
+
+
+db.getCollection('teacher').find({
+    class_curator: {$nin: [7, 8, 9]}
+})
+
+
+db.getCollection('teacher').find({
+    class_curator: {
+        $not: {
+            $in: [7, 8, 9]
+        }
+    }
+})
+
+
+db.getCollection('teacher').update(
+    {}, // FIND
+    {}, // UPDATE
+    {} // OPTIONS
+)
+
+
+db.getCollection('teacher').update(
+    {proffesion: "Developer"},
+    {$set: {girl: true}},
+    {multi: true}
+)
+
+
+db.getCollection('teacher').update(
+    {proffesion: "Developer"},
+    {
+        $set: {
+            cars: [{model: "Volvo"}, {model: "Lanos"}],
+            name: "Ivan"
+        }
+    },
+    {multi: true}
+)
+
+
+db.getCollection('teacher').find({
+    cars: {$size: 2}
+})
+
+
+db.getCollection('teacher').find({
+    cars: {$exists: false}
+})
+
+
+db.getCollection('teacher').update(
+    {
+        cars: {$size: 4}
+    },
+    {
+        $set: {
+            "cars.$[].model": "Bika"
+        }
+    }
+)
+
+
+db.getCollection('teacher').update(
+    {
+        cars: {$size: 4}
+    },
+    {
+        $set: {
+            "cars.3.model": "Bibika"
+        }
+    }
+)
+
+
+db.getCollection('teacher').find({
+    "cars.model": "Volvo"
+})
+
+
+db.getCollection('teacher').aggregate([
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $group: {
+            _id: "$payment",
+            countOfTeachers: {
+                $sum: 1
+            }
+        }
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $group: {
+            _id: "$payment",
+            countOfTeachers: {
+                $sum: 1
+            }
+        }
+    },
+    {
+        $sort: {
+            countOfTeachers: -1,
+            "_id": 1
+        }
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $group: {
+            _id: "$payment",
+            countOfTeachers: {
+                $sum: 1
+            }
+        }
+    },
+    {
+        $sort: {
+            countOfTeachers: -1,
+            "_id": 1
+        }
+    },
+    {
+        $match: {
+            countOfTeachers: {
+                $gte: 2
+            }
+        }
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {$match: {payment: {$gte: 3500}}},
+    {
+        $count: "Darmoedu"
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $group: {
+            "_id": "$payment",
+            sumOfPeaymnts: {
+                $sum: 1
+            }
+        }
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $group: {
+            "_id": 0,
+            sumOfPeaymnts: {
+                $sum: "$payment"
+            }
+        }
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $group: {
+            "_id": 0,
+            sumOfPeaymnts: {
+                // $sum: "$payment"
+                // $avg: "$payment"
+                // $max: "$payment"
+                // $min: "$payment"
+            }
+        }
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $group: {
+            "_id": "$payment",
+            teachersCount: {
+                $sum: 1
+            }
+        }
+    },
+
+    {
+        $project: {
+            "pay": "$_id",
+            teachersCount: 1,
+            "_id": 0
+        }
+    }
+])
+
+
+db.getCollection('teacher').aggregate([
+    {
+        $lookup:
+            {
+                from: "students",
+                localField: "class_curator",
+                foreignField: "class",
+                as: "std"
+            }
+    }
+])
+
+
+db.getCollection('teacher').remove({girl: true})
