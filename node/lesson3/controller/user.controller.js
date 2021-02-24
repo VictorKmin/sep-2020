@@ -3,6 +3,11 @@ const userService = require('../service/user.service');
 module.exports = {
     getAllUsers: (req, res) => {
         try {
+
+
+
+
+
             const users = userService.findUsers();
 
             res.json(users);
