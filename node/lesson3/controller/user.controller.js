@@ -8,7 +8,6 @@ module.exports = {
 
 
 
-
             const users = userService.findUsers();
 
             res.json(users);
