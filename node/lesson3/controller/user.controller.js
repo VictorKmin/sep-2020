@@ -3,6 +3,14 @@ const userService = require('../service/user.service');
 module.exports = {
     getAllUsers: (req, res) => {
         try {
+
+
+
+
+
+
+
+
             const users = userService.findUsers();
 
             res.json(users);
@@ -11,10 +19,10 @@ module.exports = {
         }
     },
 
-    getSingleUser: (req, res) => {
+    getSingleUser: async (req, res) => {
         const { userId } = req.params;
 
-        const user = userService.findUserById(userId);
+        const user = await userService.findUserById(userId);
 
         res.json(user);
     },
