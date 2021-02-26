@@ -108,7 +108,10 @@ module.exports = {
             'error',
             { varsIgnorePattern: 'ctx' },
         ],
-        'no-use-before-define': 'error',
+        'no-use-before-define': [
+            'error',
+            { functions: false }
+        ],
         'no-useless-call': 'error',
         'no-useless-concat': 'error',
         'no-useless-return': 'error',
