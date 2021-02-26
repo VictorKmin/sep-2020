@@ -41,6 +41,7 @@ module.exports = {
             4,
             { SwitchCase: 1 },
         ],
+        'linebreak-style': 'off',
         'max-classes-per-file': 'off',
         'newline-per-chained-call': 'error',
         'new-parens': 'error',
