@@ -38,7 +38,7 @@ module.exports = {
         'global-require': 'off',
         indent: [
             'warn',
-            2,
+            4,
             { SwitchCase: 1 },
         ],
         'linebreak-style': 'off',
@@ -125,6 +125,7 @@ module.exports = {
         ],
         'padding-line-between-statements': 'error',
         'prefer-const': 'error',
+        'prefer-object-spread': 'warn',
         'quote-props': [
             'error',
             'as-needed',

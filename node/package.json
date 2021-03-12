@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "start": "pm2 kill && pm2 start lesson9/app.js --name L9 --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -19,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.18",
     "nodemailer": "^6.5.0",
+    "pm2": "^4.5.5",
     "pug": "^3.0.2",
     "uuid": "^8.3.2"
   },
