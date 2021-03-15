@@ -38,7 +38,7 @@ module.exports = {
         'global-require': 'off',
         indent: [
             'warn',
-            4,
+            2,
             { SwitchCase: 1 },
         ],
         'linebreak-style': 'off',

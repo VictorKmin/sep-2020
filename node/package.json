@@ -19,15 +19,18 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.18",
+    "mysql2": "^2.2.5",
     "nodemailer": "^6.5.0",
     "pm2": "^4.5.5",
     "pug": "^3.0.2",
+    "sequelize": "^6.5.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/email-templates": "^8.0.2",
     "@types/express-fileupload": "^1.1.6",
     "@types/nodemailer": "^6.4.0",
+    "@types/sequelize": "^4.28.9",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
