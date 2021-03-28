@@ -1,0 +1,187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Sep-2020",
+    "description": "Swagger Doc for extra lesson"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get all users",
+        "operationId": "getAllUsers",
+        "parameters": [
+          {
+            "name": "ageGte",
+            "description": "When you want to get users older than some age. Select this param",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "example": 25
+          },
+          {
+            "name": "ageLte",
+            "description": "When you want to get users younger than some age. Select this param",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "example": 17
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "all users success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/singleUser"
+                  }
+                },
+                "page": {
+                  "type": "number",
+                  "description": "current page",
+                  "example": 1
+                },
+                "pages": {
+                  "type": "number",
+                  "description": "all existing page",
+                  "example": 20
+                },
+                "limit": {
+                  "type": "number",
+                  "description": "item per page",
+                  "example": 50
+                },
+                "const": {
+                  "type": "number",
+                  "description": "count of all existing element in DB",
+                  "example": 67890
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "BE custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create user",
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "email@expamle.com"
+          },
+          {
+            "name": "age",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "example": 18
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is created",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/singleUser"
+            }
+          },
+          "409": {
+            "description": "Conflict. User already exist",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "type": "number",
+                  "example": 4901,
+                  "description": "Custom code for conflict"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "email already exist",
+                  "description": "Email exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get user by Id",
+        "operationId": "getSingleUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "example": "23879879dadsdsd"
+          },
+          {
+            "name": "Authorization",
+            "description": "access token which you'll get after login",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "67697877897a7897a8d7a89d7"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "all users success",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/singleUser"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "singleUser": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Viktor"
+        },
+        "age": {
+          "type": "number",
+          "example": 25
+        }
+      }
+    }
+  }
+}
